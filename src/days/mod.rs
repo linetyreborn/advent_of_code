@@ -15,3 +15,9 @@ pub mod day2;
 #[allow(dead_code)]
 #[allow(unused_mut)]
 pub mod day3;
+
+#[allow(unused_imports)]
+#[allow(unused_variables)]
+#[allow(dead_code)]
+#[allow(unused_mut)]
+pub mod day4;
