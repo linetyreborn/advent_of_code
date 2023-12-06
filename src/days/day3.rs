@@ -48,7 +48,6 @@ pub async fn run() {
     while i < size {
         let mut line_i_minus_1 = (0, "", Vec::new(), Vec::new());
         let mut line_i = (0, "", Vec::new(), Vec::new());
-        let mut line_i_plus_1 = (0, "", Vec::new(), Vec::new());
 
         if i > 0 {
             if let Some((str_line, idx,numbers)) = full_indices1.get(&(i -1)) {
@@ -60,12 +59,7 @@ pub async fn run() {
 
         }
 
-        if i < size - 1 {
-            if let Some((str_line, idx, numbers)) = full_indices1.get(&(i +1)) {
-                line_i_plus_1 = (i+1, str_line, idx.to_vec(), numbers.to_vec());
-                // println!("line {} : {:?} : {:?}", i, str_line,idx);
-            }
-        }
+
          if line_i_minus_1.3.len() > 0 {
             for num in line_i_minus_1.3.clone().into_iter(){
                 if let Some(num_pos) = line_i_minus_1.1.find(&num) {
