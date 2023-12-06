@@ -12,29 +12,6 @@ pub fn run() {
     }
 }
 
-fn test (input: &str) {
-    let mut input_seeds_map: HashMap<i128, Seed> = HashMap::new();
-    let lines: Vec<&str> = input.lines().filter(|line| !line.is_empty()).collect();
-
-    if let Some(first_line) = lines.first() {
-        let input_seeds: Vec<i128> = first_line.split_whitespace()
-                                              .filter_map(|n| n.parse().ok())
-                                              .collect();
-        let mut previous_category = String::new();
-        let mut next_category = String::new();
-        // expand range crashes
-        for chunk in input_seeds.chunks(2) {
-            println!("chunck {:?}", chunk);
-            let start = chunk[0];
-            let end = start + chunk[1];
-            println!("end {:?}", end);
-            let numbers = (start as i128)..(end as i128);
-            println!("numbers {:?}", numbers);
-        }
-    }
-}
-
-
 fn parse_seeds(input: &str) -> HashMap<i128, Seed> {
     let mut input_seeds_map: HashMap<i128, Seed> = HashMap::new();
     let lines: Vec<&str> = input.lines().filter(|line| !line.is_empty()).collect();
