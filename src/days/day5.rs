@@ -5,7 +5,6 @@ use std::collections::HashSet;
 pub fn run() {
     let input = read_string_from_file("ressources/input5.txt");
     let seeds = parse_seeds(&input);
-
     if let Some(lowest_location_seed) = find_seed_with_lowest_location(&seeds) {
         println!("lowest location: {:?}", lowest_location_seed.additional_info["location"]);
     } else {
@@ -13,13 +12,35 @@ pub fn run() {
     }
 }
 
-
-fn parse_seeds(input: &str) -> HashMap<i64, Seed> {
-    let mut input_seeds_map: HashMap<i64, Seed> = HashMap::new();
+fn test (input: &str) {
+    let mut input_seeds_map: HashMap<i128, Seed> = HashMap::new();
     let lines: Vec<&str> = input.lines().filter(|line| !line.is_empty()).collect();
 
     if let Some(first_line) = lines.first() {
-        let input_seeds: Vec<i32> = first_line.split_whitespace()
+        let input_seeds: Vec<i128> = first_line.split_whitespace()
+                                              .filter_map(|n| n.parse().ok())
+                                              .collect();
+        let mut previous_category = String::new();
+        let mut next_category = String::new();
+        // expand range crashes
+        for chunk in input_seeds.chunks(2) {
+            println!("chunck {:?}", chunk);
+            let start = chunk[0];
+            let end = start + chunk[1];
+            println!("end {:?}", end);
+            let numbers = (start as i128)..(end as i128);
+            println!("numbers {:?}", numbers);
+        }
+    }
+}
+
+
+fn parse_seeds(input: &str) -> HashMap<i128, Seed> {
+    let mut input_seeds_map: HashMap<i128, Seed> = HashMap::new();
+    let lines: Vec<&str> = input.lines().filter(|line| !line.is_empty()).collect();
+
+    if let Some(first_line) = lines.first() {
+        let input_seeds: Vec<i128> = first_line.split_whitespace()
                                               .filter_map(|n| n.parse().ok())
                                               .collect();
         let mut previous_category = String::new();
@@ -28,7 +49,7 @@ fn parse_seeds(input: &str) -> HashMap<i64, Seed> {
         for chunk in input_seeds.chunks(2) {
             let start = chunk[0];
             let end = start + chunk[1];
-            let numbers = (start as i64)..(end as i64);
+            let numbers = start..end;
 
             // main calculations
             for input_seed in numbers {
@@ -43,7 +64,7 @@ fn parse_seeds(input: &str) -> HashMap<i64, Seed> {
                                 }
                             }
                         } else if parts.len() == 3 {
-                            let dest_source_range: Vec<i64> = parts.iter().filter_map(|&n| n.parse().ok()).collect();
+                            let dest_source_range: Vec<i128> = parts.iter().filter_map(|&n| n.parse().ok()).collect();
                             if let [dest, source, range] = dest_source_range[..] {
                             
                                 let seed = input_seeds_map.entry(input_seed).or_insert_with(|| Seed {
@@ -75,21 +96,16 @@ fn parse_seeds(input: &str) -> HashMap<i64, Seed> {
     input_seeds_map
 }
 
-fn remove_duplicates(vec: Vec<i64>) -> Vec<i64> {
-    let set: HashSet<_> = vec.into_iter().collect();
-    set.into_iter().collect()
-}
-
 #[derive(Debug, Clone)]
 struct Seed {
-    seed_number: i64,
-    additional_info: HashMap<String, i64>,
+    seed_number: i128,
+    additional_info: HashMap<String, i128>,
 }
 
-fn find_seed_with_lowest_location(seeds: &HashMap<i64, Seed>) -> Option<&Seed> {
+fn find_seed_with_lowest_location(seeds: &HashMap<i128, Seed>) -> Option<&Seed> {
     seeds.values()
          .filter(|seed| seed.additional_info.contains_key("location"))
-         .min_by_key(|seed| seed.additional_info.get("location").unwrap_or(&i64::MAX))
+         .min_by_key(|seed| seed.additional_info.get("location").unwrap_or(&i128::MAX))
 }
 
 fn read_string_from_file(path: &str) -> String {
