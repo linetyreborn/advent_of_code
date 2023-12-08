@@ -1,7 +1,6 @@
 use std::fs;
 use std::collections::HashMap;
 use std::collections::HashSet;
-use rayon::prelude::*;
 
 pub fn run() {
     let input = read_string_from_file("ressources/input8.txt");

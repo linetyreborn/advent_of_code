@@ -3,7 +3,6 @@ use regex::Regex;
 use std::fs;
 use std::fmt::format;
 use std::env;
-#[tokio::main]
 pub async fn run() {
       // this method needs to be inside main() method
     // env::set_var("RUST_BACKTRACE", "full");

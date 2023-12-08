@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 use std::fs;
-#[tokio::main]
 pub async fn run(){
     
     /*

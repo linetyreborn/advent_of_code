@@ -1,6 +1,5 @@
 use regex::Regex;
 use std::fs;
-#[tokio::main]
 pub async fn run() {
 
     /*
