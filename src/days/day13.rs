@@ -31,16 +31,31 @@ fn parse_pattern(input: &str) {
             patterns[i].1[x].push(c);
         }
     }
-
+    println!("there is {} patterns", patterns.len());
     let mut result = 0;
     for (index, pattern) in patterns.iter().enumerate() {
+
         let mut max_vertical_reflexion = (0, false);
         let mut max_horizontal_reflexion = (0, false);
         for (x, column) in pattern.1.iter().enumerate() {
-            if x > 0 && x < pattern.1.len() - 1 && (column == &pattern.1[x+1]) {
+            if x < pattern.1.len() - 2 && (column == &pattern.1[x+2]) {
+                let mut vertical_reflexion = (x+1, true);
+                for i in 0..cmp::min(x, pattern.1.len() -(x+2)) {
+                    if !are_equal(pattern.1[x-i].clone(),pattern.1[x+2+i].clone()) {
+                        vertical_reflexion.1 = false;
+                    }
+                }
+                if vertical_reflexion.1 {
+                    if max_vertical_reflexion.0 < vertical_reflexion.0 {
+                        max_vertical_reflexion = vertical_reflexion;
+                    }
+                    println!("{} : vertical_reflexion {:?}" ,index, vertical_reflexion);
+                }
+            }
+            if x < pattern.1.len() - 1 && (column == &pattern.1[x+1]) {
                 let mut vertical_reflexion = (x+1, true);
                 for i in 0..cmp::min(x, pattern.1.len() -(x+1)) {
-                    if pattern.1[x-i] != pattern.1[x+1+i] {
+                    if !are_equal(pattern.1[x-i].clone(),pattern.1[x+1+i].clone()) {
                         vertical_reflexion.1 = false;
                     }
                 }
@@ -53,10 +68,24 @@ fn parse_pattern(input: &str) {
             }
         }
         for (x, row) in pattern.0.iter().enumerate() {
-            if x > 0 && x < pattern.0.len() - 1 && (row == &pattern.0[x+1]) {
+            if x < pattern.0.len() - 2 && (row == &pattern.0[x+2]) {
+                let mut horizontal_reflexion = (x+1, true);
+                for i in 0..cmp::min(x, pattern.0.len() -(x+2)) {
+                    if !are_equal(pattern.0[x-i].clone(), pattern.0[x+2+i].clone()) {
+                        horizontal_reflexion.1 = false;
+                    }
+                }
+                if horizontal_reflexion.1 {
+                    if max_horizontal_reflexion.0 < horizontal_reflexion.0 {
+                        max_horizontal_reflexion = horizontal_reflexion;
+                    }
+                    println!("{} : horizontal_reflexion {:?}" ,index, horizontal_reflexion);
+                }
+            }
+            if x < pattern.0.len() - 1 && (row == &pattern.0[x+1]) {
                 let mut horizontal_reflexion = (x+1, true);
                 for i in 0..cmp::min(x, pattern.0.len() -(x+1)) {
-                    if pattern.0[x-i] != pattern.0[x+1+i] {
+                    if !are_equal(pattern.0[x-i].clone() ,pattern.0[x+1+i].clone()) {
                         horizontal_reflexion.1 = false;
                     }
                 }
@@ -85,6 +114,27 @@ fn parse_pattern(input: &str) {
     println!("result: {:?}", result);
 }
 
+fn are_equal(vec1: Vec<char>, vec2: Vec<char>) -> bool {
+    // part1
+    // return vec1 == vec2;
+    // part2
+    return has_zero_or_one_difference(vec1, vec2);
+}
+
+fn has_zero_or_one_difference(vec1: Vec<char>, vec2: Vec<char>) -> bool {
+    let mut count = 0;
+
+    for (item1, item2) in vec1.iter().zip(vec2.iter()) {
+        if item1 != item2 {
+            count += 1;
+            if count > 1 {
+                return false;
+            }
+        }
+    }
+
+    true
+}
 fn read_string_from_file(path: &str) -> String {
     fs::read_to_string(path).unwrap_or_else(|_| panic!("Unable to read file: {}", path))
 }
