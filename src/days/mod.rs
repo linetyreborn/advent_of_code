@@ -75,3 +75,9 @@ pub mod day12;
 #[allow(dead_code)]
 #[allow(unused_mut)]
 pub mod day13;
+
+#[allow(unused_imports)]
+#[allow(unused_variables)]
+#[allow(dead_code)]
+#[allow(unused_mut)]
+pub mod day14;
