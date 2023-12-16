@@ -1,83 +1,24 @@
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day1;
+macro_rules! declare_module {
+    ($mod_name:ident) => {
+        #[allow(unused_imports)]
+        #[allow(unused_variables)]
+        #[allow(dead_code)]
+        #[allow(unused_mut)]
+        pub mod $mod_name;
+    };
+}
 
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day2;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day3;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day4;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day5;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day6;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day7;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day8;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day9;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day10;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day11;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day12;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day13;
-
-#[allow(unused_imports)]
-#[allow(unused_variables)]
-#[allow(dead_code)]
-#[allow(unused_mut)]
-pub mod day14;
+declare_module!(day1);
+declare_module!(day2);
+declare_module!(day3);
+declare_module!(day4);
+declare_module!(day5);
+declare_module!(day6);
+declare_module!(day7);
+declare_module!(day8);
+declare_module!(day9);
+declare_module!(day10);
+declare_module!(day11);
+declare_module!(day12);
+declare_module!(day13);
+declare_module!(day14);

@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use std::fs;
-pub async fn run(){
+pub fn run(){
     
     /*
         let exercite_url = "https://adventofcode.com/2023/day/2";

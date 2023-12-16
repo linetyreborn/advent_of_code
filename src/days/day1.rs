@@ -1,21 +1,20 @@
 use regex::Regex;
 use std::fs;
-pub async fn run() {
 
-    /*
-        let exercite_url = "https://adventofcode.com/2023/day/1";
-    */
-    let digits = [
-        ("one", "1"),
-        ("two", "2"),
-        ("three", "3"),
-        ("four", "4"),
-        ("five", "5"),
-        ("six", "6"),
-        ("seven", "7"),
-        ("eight", "8"),
-        ("nine", "9")
-    ];
+
+static DIGITS: &[(&str, &str)] = &[
+    ("one", "1"),
+    ("two", "2"),
+    ("three", "3"),
+    ("four", "4"),
+    ("five", "5"),
+    ("six", "6"),
+    ("seven", "7"),
+    ("eight", "8"),
+    ("nine", "9"),
+];
+
+pub fn run() {
     let input  = read_string_from_file("ressources/input1.txt");
     // Define a regular expression to match numbers
     let re = Regex::new(r"\d+").unwrap();
@@ -24,7 +23,7 @@ pub async fn run() {
     for line in input.lines() {
         let mut new_line = line.to_string();
         let mut positions = Vec::new();
-        for (key, value) in digits.iter() {
+        for (key, value) in DIGITS.iter() {
 
             if let Some(pos) = line.find(key) {
 
