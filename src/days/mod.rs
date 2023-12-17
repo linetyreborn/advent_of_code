@@ -22,3 +22,4 @@ declare_module!(day11);
 declare_module!(day12);
 declare_module!(day13);
 declare_module!(day14);
+declare_module!(day15);
